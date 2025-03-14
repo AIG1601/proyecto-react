@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react"
 import axios from "axios"
+import Cripto from "./Cripto/Cripto"
+import "./Cuadricula.css"
 
-function App() {
+
+function Cuadricula() {
 
   const [criptos, setCriptos] = useState()
 
@@ -34,19 +37,18 @@ function App() {
   if (!criptos) return <span>Cargando...</span>
 
   return (
-    <>
-    <h1>Lista de Criptomonedas</h1>
-    <ol>
-      {
-        criptos.map(({id,name,priceUsd}) => (
-          <li key={id}> Nombre: {name}  Precio: {priceUsd}</li> //cada hijo de una lista debe tenr un key, es decir un identificador unico
-        ))
-      }
-    </ol>
-    </>
-    
-
+    <div className="app-container">
+      <h1>Lista de Criptomonedas</h1>
+      <div className="cripto-container">
+        {
+          criptos.map(({id,name,priceUsd,symbol,changePercent24Hr}) => (
+            //<li key={id}> Nombre: {name}  Precio: {priceUsd}</li> //cada hijo de una lista debe tenr un key, es decir un identificador unico
+            <Cripto key={id} name={name} priceUSD={priceUsd} symbol={symbol} percent={changePercent24Hr} id={id}/>
+          ))
+        }
+      </div>
+    </div>
   )
 }
 
-export default App
+export default Cuadricula;
